@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>The Matrix - Reloaded</title>
+  </head>
+  <body>
+    <canvas id="matrix-canvas"></canvas>
+
+    <div id="controls">
+      <div class="control-group">
+        <label for="rainbow-toggle">Modo Rainbow</label>
+        <input type="checkbox" id="rainbow-toggle" />
+      </div>
+      <div class="control-group">
+        <label for="speed-slider">Velocidade</label>
+        <input type="range" id="speed-slider" min="10" max="150" value="50" />
+      </div>
+      <div class="control-group">
+        <label for="color-picker">Cor Customizada</label>
+        <input type="color" id="color-picker" value="#00ff41" />
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
