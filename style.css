@@ -6,7 +6,7 @@
 
 body {
   background: black;
-  overflow: hidden; /* Esconde as barras de rolagem */
+  overflow: hidden;
 }
 
 canvas {

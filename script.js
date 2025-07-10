@@ -8,15 +8,14 @@ class MatrixEffect {
       chars:
         "アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       trailColor: "rgba(0, 0, 0, 0.05)",
-      ...config, // Permite sobrescrever configurações padrão
+      ...config,
     };
     this.characters = this.config.chars.split("");
     this.drops = [];
-    this.hue = 0; // Para o modo rainbow
+    this.hue = 0;
     this.init();
   }
 
-  // Inicializa ou reinicializa o efeito
   init() {
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
@@ -27,9 +26,7 @@ class MatrixEffect {
     }
   }
 
-  // Função principal de desenho
   draw() {
-    // Fundo semi-transparente para criar o efeito de rastro
     this.ctx.fillStyle = this.config.trailColor;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -53,11 +50,9 @@ class MatrixEffect {
 
       this.ctx.fillText(text, x, y);
 
-      // Adiciona o brilho na "cabeça" da gota
-      this.ctx.fillStyle = "#fff"; // Cor branca para o brilho
+      this.ctx.fillStyle = "#fff";
       this.ctx.fillText(text, x, y);
 
-      // Reseta a gota para o topo se ela sair da tela
       if (y > this.canvas.height && Math.random() > 0.98) {
         this.drops[i] = 0;
       }
@@ -70,7 +65,6 @@ class MatrixEffect {
     }
   }
 
-  // Inicia o loop de animação
   start() {
     const loop = () => {
       this.draw();
@@ -80,33 +74,28 @@ class MatrixEffect {
   }
 }
 
-// --- CONFIGURAÇÃO E EXECUÇÃO ---
-
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("matrix-canvas");
 
-  // Configurações iniciais
   const config = {
     speed: 50,
     rainbow: false,
-    fontColor: "#00ff41", // Verde Matrix clássico
+    fontColor: "#00ff41",
   };
 
   const matrixEffect = new MatrixEffect(canvas, config);
   matrixEffect.start();
 
-  // --- CONTROLES DA INTERFACE ---
   const rainbowToggle = document.getElementById("rainbow-toggle");
   const speedSlider = document.getElementById("speed-slider");
   const colorPicker = document.getElementById("color-picker");
 
   rainbowToggle.addEventListener("change", (e) => {
     matrixEffect.config.rainbow = e.target.checked;
-    colorPicker.disabled = e.target.checked; // Desativa o seletor de cor no modo rainbow
+    colorPicker.disabled = e.target.checked;
   });
 
   speedSlider.addEventListener("input", (e) => {
-    // Invertemos o valor do slider porque um valor menor no setTimeout = mais rápido
     matrixEffect.config.speed = 160 - e.target.value;
   });
 
@@ -114,12 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
     matrixEffect.config.fontColor = e.target.value;
   });
 
-  // Lidar com o redimensionamento da janela de forma inteligente
   window.addEventListener("resize", () => {
     matrixEffect.init();
   });
 
-  // --- COMPATIBILIDADE COM LIVELY WALLPAPER (Código original mantido) ---
   function hexToRgb(hex) {
     var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
@@ -139,8 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
         matrixEffect.config.rainbow = val;
         break;
       case "rainbowSpeed":
-        // Esta propriedade não se aplica diretamente ao novo modelo,
-        // mas podemos adaptar se necessário.
         break;
     }
   };
